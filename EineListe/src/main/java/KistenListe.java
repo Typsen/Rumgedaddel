@@ -1,38 +1,38 @@
 public class KistenListe implements Liste {
 
-  /**
-   * Die erste Kiste der Liste
-   */
-  private Kiste ersteKiste;
+    /**
+     * Die erste Kiste der Liste
+     */
+    private Kiste ersteKiste;
 
-  /**
-   * Die aktuell betrachtete Kiste als Objektvariable anstatt lokaler Variable in Methoden.
-   */
-  private Kiste aktuelleKiste;
+    /**
+     * Die aktuell betrachtete Kiste als Objektvariable anstatt lokaler Variable in Methoden.
+     */
+    private Kiste aktuelleKiste;
 
-  /**
-   * Der Name der Kistenliste
-   */
-  private String kistenListenName;
+    /**
+     * Der Name der Kistenliste
+     */
+    private String kistenListenName;
 
-  /**
-   * Aktuelle Länge der Kistenliste.
-   */
-  private int kistenListenLaenge;
+    /**
+     * Aktuelle Länge der Kistenliste.
+     */
+    private int kistenListenLaenge;
 
-  /**
-   * Zähler aller Kistenlisten
-   */
-  private static int kistenListenZaehler;
+    /**
+     * Zähler aller Kistenlisten
+     */
+    private static int kistenListenZaehler;
 
-  public KistenListe(String listenName) {
-    this.kistenListenName = "Kisten-Liste\nNr: " + kistenListenZaehler + "\nName: " + listenName;
-    kistenListenZaehler++;
-  }
+    public KistenListe(String listenName) {
+        this.kistenListenName = "Kisten-Liste\nNr: " + kistenListenZaehler + "\nName: " + listenName;
+        kistenListenZaehler++;
+    }
 
-  @Override
-  public void anhaengen(String text) {
-    if (ersteKiste != null && this.vergleicheInhalt(text)) {
+    @Override
+    public void anhaengen(String text) {
+        if (ersteKiste != null && this.vergleicheInhalt(text)) {
       aktuelleKiste = this.findeKiste(text);
       this.ersetzen(text, aktuelleKiste.getKistenIndex());
     }
@@ -54,71 +54,71 @@ public class KistenListe implements Liste {
     kistenListenLaenge++;
   }
 
-  @Override
-  public void aussortieren(String text) {
-    aktuelleKiste = this.findeKiste(text);
-    if (aktuelleKiste.getVorherigeKiste() == null) {
-      ersteKiste = aktuelleKiste.getNaechstKiste();
-      ersteKiste.setVorherigeKiste(null);
-    } else if (aktuelleKiste.getNaechstKiste() == null) {
-      aktuelleKiste.getVorherigeKiste().setNaechstKiste(null);
-    } else {
-      aktuelleKiste.getNaechstKiste().setVorherigeKiste(aktuelleKiste.getVorherigeKiste());
-      aktuelleKiste.getVorherigeKiste().setNaechstKiste(aktuelleKiste.getNaechstKiste());
-      this.verringereWeitereKistenIndizes(aktuelleKiste);
-      aktuelleKiste.setNaechstKiste(null);
+    @Override
+    public void aussortieren(String text) {
+        aktuelleKiste = this.findeKiste(text);
+        if (aktuelleKiste.getVorherigeKiste() == null) {
+            ersteKiste = aktuelleKiste.getNaechstKiste();
+            ersteKiste.setVorherigeKiste(null);
+        } else if (aktuelleKiste.getNaechstKiste() == null) {
+            aktuelleKiste.getVorherigeKiste().setNaechstKiste(null);
+        } else {
+            aktuelleKiste.getNaechstKiste().setVorherigeKiste(aktuelleKiste.getVorherigeKiste());
+            aktuelleKiste.getVorherigeKiste().setNaechstKiste(aktuelleKiste.getNaechstKiste());
+            this.verringereWeitereKistenIndizes(aktuelleKiste);
+            aktuelleKiste.setNaechstKiste(null);
+        }
+        aktuelleKiste.setVorherigeKiste(null);
+        kistenListenLaenge--;
     }
-    aktuelleKiste.setVorherigeKiste(null);
-    kistenListenLaenge--;
-  }
 
-  @Override
-  public void einsortieren(String text, int index) {
-    Kiste kiste = new Kiste(text);
-    aktuelleKiste = this.findeKiste(index);
-    kiste.setVorherigeKiste(aktuelleKiste.getVorherigeKiste());
-    aktuelleKiste.getVorherigeKiste().setNaechstKiste(kiste);
-    kiste.setNaechstKiste(aktuelleKiste);
-    aktuelleKiste.setVorherigeKiste(kiste);
-    this.erhoeheWeitereKistenIndizes(kiste);
-    kistenListenLaenge++;
-  }
-
-  @Override
-  public void ersetzen(String text, int index) {
-    aktuelleKiste = this.findeKiste(index);
-    aktuelleKiste.setInhalt(text);
-  }
-
-  @Override
-  public String anschauen(int index) {
-    aktuelleKiste = ersteKiste;
-    while (aktuelleKiste.getKistenIndex() != index) {
-      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+    @Override
+    public void einsortieren(String text, int index) {
+        Kiste kiste = new Kiste(text);
+        aktuelleKiste = this.findeKiste(index);
+        kiste.setVorherigeKiste(aktuelleKiste.getVorherigeKiste());
+        aktuelleKiste.getVorherigeKiste().setNaechstKiste(kiste);
+        kiste.setNaechstKiste(aktuelleKiste);
+        aktuelleKiste.setVorherigeKiste(kiste);
+        this.erhoeheWeitereKistenIndizes(kiste);
+        kistenListenLaenge++;
     }
-    return aktuelleKiste.getInhalt();
-  }
 
-  @Override
-  public void machLeer() {
-    this.ersteKiste = null;
-  }
+    @Override
+    public void ersetzen(String text, int index) {
+        aktuelleKiste = this.findeKiste(index);
+        aktuelleKiste.setInhalt(text);
+    }
 
-  @Override
-  public void printListe() {
-    System.out.println(kistenListenName);
-    System.out.println("Die Liste hat " + kistenListenLaenge + " Elemente.");
-    if (ersteKiste == null) {
-      System.out.println("Diese Liste ist leer.");
-      return;
+    @Override
+    public String anschauen(int index) {
+        aktuelleKiste = ersteKiste;
+        while (aktuelleKiste.getKistenIndex() != index) {
+            aktuelleKiste = aktuelleKiste.getNaechstKiste();
+        }
+        return aktuelleKiste.getInhalt();
     }
-    aktuelleKiste = ersteKiste;
-    while (aktuelleKiste != null) {
-      System.out.println("[" + aktuelleKiste.getKistenIndex() + "] " + aktuelleKiste.getInhalt());
-      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+
+    @Override
+    public void machLeer() {
+        this.ersteKiste = null;
     }
-    System.out.println();
-  }
+
+    @Override
+    public void printListe() {
+        System.out.println(kistenListenName);
+        System.out.println("Die Liste hat " + kistenListenLaenge + " Elemente.");
+        if (ersteKiste == null) {
+            System.out.println("Diese Liste ist leer.");
+            return;
+        }
+        aktuelleKiste = ersteKiste;
+        while (aktuelleKiste != null) {
+            System.out.println("[" + aktuelleKiste.getKistenIndex() + "] " + aktuelleKiste.getInhalt());
+            aktuelleKiste = aktuelleKiste.getNaechstKiste();
+        }
+        System.out.println();
+    }
 
   @Override
   public int laenge() {
@@ -138,33 +138,33 @@ public class KistenListe implements Liste {
     kiste.setVorherigeKiste(aktuelleKiste);
   }
 
-  /**
-   * Findet die erste Kiste mit dem Inhalt String text.
-   *
-   * @param text
-   * @return aktuelleKiste
-   */
-  private Kiste findeKiste(String text) {
-    aktuelleKiste = ersteKiste;
-    while (aktuelleKiste.getInhalt() != text) {
-      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+    /**
+     * Findet die erste Kiste mit dem Inhalt String text.
+     *
+     * @param text
+     * @return aktuelleKiste
+     */
+    private Kiste findeKiste(String text) {
+        aktuelleKiste = ersteKiste;
+        while (aktuelleKiste.getInhalt() != text) {
+            aktuelleKiste = aktuelleKiste.getNaechstKiste();
+        }
+        return aktuelleKiste;
     }
-    return aktuelleKiste;
-  }
 
-  /**
-   * Findet die Kiste mit dem int index.
-   *
-   * @param index
-   * @return aktuelleKiste
-   */
-  private Kiste findeKiste(int index) {
-    aktuelleKiste = ersteKiste;
-    while (aktuelleKiste.getKistenIndex() != index) {
-      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+    /**
+     * Findet die Kiste mit dem int index.
+     *
+     * @param index
+     * @return aktuelleKiste
+     */
+    private Kiste findeKiste(int index) {
+        aktuelleKiste = ersteKiste;
+        while (aktuelleKiste.getKistenIndex() != index) {
+            aktuelleKiste = aktuelleKiste.getNaechstKiste();
+        }
+        return aktuelleKiste;
     }
-    return aktuelleKiste;
-  }
 
   private boolean vergleicheInhalt(String text) {
     aktuelleKiste = ersteKiste;

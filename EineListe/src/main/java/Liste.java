@@ -44,9 +44,6 @@ public interface Liste {
 
   /**
    * Gibt die Laenge der Kiste als int zurück.
-   *
-   * @return
    */
   int laenge();
-
 }
