@@ -2,6 +2,7 @@ public class Main {
   public static void main(String[] args) {
     checkKistenListeSachen();
     checkArrayListenSachen();
+    checkMarvinsListenSachen();
   }
 
   private static void checkKistenListeSachen() {
@@ -58,5 +59,28 @@ public class Main {
     al0.printListe();
 
     //Leer
+  }
+
+  private static void checkMarvinsListenSachen() {
+    Liste liste = new MarvinsListe();
+
+    System.out.println("\nEinführung");
+    liste.anhaengen("moin");
+    liste.anhaengen("was");
+    liste.anhaengen("geht");
+    liste.printListe();
+
+    System.out.println("\nBeobachtung");
+    System.out.println(liste.anschauen(0));
+
+    System.out.println("\nEskalation");
+    liste.ersetzen("servus", 0);
+    liste.aussortieren("nicht");
+    liste.einsortieren("ab", 3);
+    liste.printListe();
+
+    System.out.println("\nLeere");
+    liste.machLeer();
+    liste.printListe();
   }
 }
