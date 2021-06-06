@@ -6,14 +6,16 @@ public class Main {
 
   private static void checkKistenListeSachen() {
     Liste kl0 = new KistenListe("Eine Kistenliste");
+    Kiste boeseKiste = new Kiste("Drei");
 
     //Anhängen
     kl0.anhaengen("Null");
     kl0.anhaengen("Eins");
     kl0.anhaengen("Zwei");
-    kl0.anhaengen("Drei");
+    kl0.anhaengen(boeseKiste.getInhalt());
     kl0.anhaengen("Vier");
     kl0.anhaengen("Fünf");
+    kl0.anhaengen(boeseKiste.getInhalt());
 
     //Aussortieren
     kl0.aussortieren("Eins");

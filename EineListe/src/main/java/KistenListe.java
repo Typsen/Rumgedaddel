@@ -32,6 +32,10 @@ public class KistenListe implements Liste {
 
   @Override
   public void anhaengen(String text) {
+    if (ersteKiste != null && this.vergleicheInhalt(text)) {
+      aktuelleKiste = this.findeKiste(text);
+      this.ersetzen(text, aktuelleKiste.getKistenIndex());
+    }
     Kiste kiste = new Kiste(text);
     if (ersteKiste == null) {
       ersteKiste = kiste;
@@ -116,6 +120,11 @@ public class KistenListe implements Liste {
     System.out.println();
   }
 
+  @Override
+  public int laenge() {
+    return kistenListenLaenge;
+  }
+
   /**
    * Findet die vorherige Kiste einer Kiste kiste.
    *
@@ -155,6 +164,17 @@ public class KistenListe implements Liste {
       aktuelleKiste = aktuelleKiste.getNaechstKiste();
     }
     return aktuelleKiste;
+  }
+
+  private boolean vergleicheInhalt(String text) {
+    aktuelleKiste = ersteKiste;
+    while (aktuelleKiste.getInhalt() != text) {
+      if (aktuelleKiste.getNaechstKiste() == null) {
+        return false;
+      }
+      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+    }
+    return true;
   }
 
   /**

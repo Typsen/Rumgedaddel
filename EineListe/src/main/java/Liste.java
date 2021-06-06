@@ -41,4 +41,12 @@ public interface Liste {
    * Printet die Liste auf der Konsole
    */
   void printListe();
+
+  /**
+   * Gibt die Laenge der Kiste als int zurück.
+   *
+   * @return
+   */
+  int laenge();
+
 }
