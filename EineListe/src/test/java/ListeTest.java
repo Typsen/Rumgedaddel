@@ -238,11 +238,11 @@ class ListeTest {
         liste.anhaengen("was");
         liste.anhaengen("geht");
 
-        // Wenn, Dann
-        liste.machLeer();
-        assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(() -> liste.anschauen(0));
-    }
+    // Wenn
+    liste.machLeer();
+    // Dann
+    assertThat(liste.laenge()).isEqualTo(0);
+  }
 }
 
 // Liste sollte eine Methode laenge() haben
