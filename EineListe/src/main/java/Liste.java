@@ -27,6 +27,12 @@ public interface Liste {
   void ersetzen(String text, int index);
 
   /**
+   * Liefert den Inhalt String indexInhalt zurück
+   * @param index
+   */
+  String anschauen(int index);
+
+  /**
    * Leert die gesamte Liste
    */
   void machLeer();

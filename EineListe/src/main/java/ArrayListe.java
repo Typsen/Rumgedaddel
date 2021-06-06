@@ -68,6 +68,11 @@ public class ArrayListe implements Liste {
   }
 
   @Override
+  public String anschauen(int index) {
+    return null;
+  }
+
+  @Override
   public void machLeer() {
     array = null;
   }

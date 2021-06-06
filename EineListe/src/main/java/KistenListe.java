@@ -87,6 +87,15 @@ public class KistenListe implements Liste {
   }
 
   @Override
+  public String anschauen(int index) {
+    aktuelleKiste = ersteKiste;
+    while (aktuelleKiste.getKistenIndex() != index) {
+      aktuelleKiste = aktuelleKiste.getNaechstKiste();
+    }
+    return aktuelleKiste.getInhalt();
+  }
+
+  @Override
   public void machLeer() {
     this.ersteKiste = null;
   }
