@@ -3,4 +3,6 @@
 .idea/
 
 # Gradle
+gradle/
 .gradle/
+build/
