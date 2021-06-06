@@ -12,6 +12,7 @@ class ListeTest {
     void aufsetzen() {
         liste = new KistenListe("Kisten Liste");
         // liste = new ArrayListe("Array Liste");
+        //liste = new MarvinsListe();
     }
 
     @Test
@@ -60,7 +61,7 @@ class ListeTest {
     void anschauen_IndexZuGross() {
         // Wenn, Dann
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(() -> liste.anschauen(1));
+                .isThrownBy(() -> liste.anschauen(0));
     }
 
     @Test
@@ -238,11 +239,10 @@ class ListeTest {
         liste.anhaengen("was");
         liste.anhaengen("geht");
 
-    // Wenn
-    liste.machLeer();
-    // Dann
-    assertThat(liste.laenge()).isEqualTo(0);
-  }
-}
+        // Wenn
+        liste.machLeer();
 
-// Liste sollte eine Methode laenge() haben
+        // Dann
+        assertThat(liste.laenge()).isEqualTo(0);
+    }
+}
