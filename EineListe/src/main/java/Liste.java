@@ -41,4 +41,9 @@ public interface Liste {
    * Printet die Liste auf der Konsole
    */
   void printListe();
+
+  /**
+   * Gibt die Länge zurück
+   */
+  int laenge();
 }

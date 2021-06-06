@@ -86,6 +86,11 @@ public class ArrayListe implements Liste {
     }
   }
 
+  @Override
+  public int laenge() {
+    return array.length;
+  }
+
   /**
    * Vergrößert das Array um einen Index.
    *
